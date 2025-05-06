@@ -1,12 +1,89 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React, { useEffect } from 'react';
+import Navigation from '@/components/Navigation';
+import Hero from '@/components/Hero';
+import Benefits from '@/components/Benefits';
+import HowItWorks from '@/components/HowItWorks';
+import Performance from '@/components/Performance';
+import AccountTiers from '@/components/AccountTiers';
+import MLMPlan from '@/components/MLMPlan';
+import Security from '@/components/Security';
+import Testimonials from '@/components/Testimonials';
+import FAQ from '@/components/FAQ';
+import LeadCapture from '@/components/LeadCapture';
+import Footer from '@/components/Footer';
+
+// Define AOS animation initialization
+interface AOS {
+  init: () => void;
+}
+
+declare global {
+  interface Window {
+    AOS?: AOS;
+  }
+}
 
 const Index = () => {
+  useEffect(() => {
+    // Simulating AOS initialization
+    const simulateAOS = () => {
+      const elements = document.querySelectorAll('[data-aos]');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      elements.forEach(element => {
+        observer.observe(element);
+      });
+    };
+
+    // Run the AOS simulation once the component is mounted
+    simulateAOS();
+  }, []);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      {/* Navigation */}
+      <Navigation />
+
+      {/* Hero Section */}
+      <Hero />
+
+      {/* Benefits Section */}
+      <Benefits />
+
+      {/* How It Works Section */}
+      <HowItWorks />
+
+      {/* Performance Dashboard */}
+      <Performance />
+
+      {/* Account Tiers */}
+      <AccountTiers />
+
+      {/* MLM Plan */}
+      <MLMPlan />
+
+      {/* Security & Compliance */}
+      <Security />
+
+      {/* Testimonials Carousel */}
+      <Testimonials />
+
+      {/* FAQs */}
+      <FAQ />
+
+      {/* Lead Capture */}
+      <LeadCapture />
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };
