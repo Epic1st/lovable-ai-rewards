@@ -16,32 +16,46 @@ import TestimonialsPage from "@/pages/TestimonialsPage";
 import FAQPage from "@/pages/FAQPage";
 import ContactPage from "@/pages/ContactPage";
 import NotFound from "@/pages/NotFound";
+import { useEffect } from "react";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Navigation />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/ai-engine" element={<AIEnginePage />} />
-          <Route path="/roi-calculator" element={<ROICalculatorPage />} />
-          <Route path="/mlm-plan" element={<MLMPlanPage />} />
-          <Route path="/accounts" element={<AccountsPage />} />
-          <Route path="/security" element={<SecurityPage />} />
-          <Route path="/testimonials" element={<TestimonialsPage />} />
-          <Route path="/faq" element={<FAQPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  useEffect(() => {
+    // Initialize or refresh AOS when App mounts
+    if (typeof window !== 'undefined' && window.AOS) {
+      window.AOS.refresh();
+    }
+  }, []);
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <div className="flex flex-col min-h-screen bg-background">
+            <Navigation />
+            <div className="flex-grow">
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/ai-engine" element={<AIEnginePage />} />
+                <Route path="/roi-calculator" element={<ROICalculatorPage />} />
+                <Route path="/mlm-plan" element={<MLMPlanPage />} />
+                <Route path="/accounts" element={<AccountsPage />} />
+                <Route path="/security" element={<SecurityPage />} />
+                <Route path="/testimonials" element={<TestimonialsPage />} />
+                <Route path="/faq" element={<FAQPage />} />
+                <Route path="/contact" element={<ContactPage />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </div>
+            <Footer />
+          </div>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;

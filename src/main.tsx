@@ -6,10 +6,13 @@ import './assets/AOS.css'
 import AOS from 'aos';
 
 // Initialize AOS animation library
-AOS.init({
-  duration: 800,
-  once: false,
-  mirror: true,
+document.addEventListener('DOMContentLoaded', () => {
+  AOS.init({
+    duration: 800,
+    once: false,
+    mirror: true,
+    startEvent: 'DOMContentLoaded'
+  });
 });
 
 createRoot(document.getElementById("root")!).render(<App />);
