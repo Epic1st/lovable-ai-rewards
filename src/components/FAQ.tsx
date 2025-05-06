@@ -10,29 +10,33 @@ import {
 const FAQ: React.FC = () => {
   const faqs = [
     {
-      question: "How is 2% calculated?",
-      answer: "The 2% daily return is calculated based on your principal investment amount and is credited to your account every 24 hours. Our AI trading system operates continuously across multiple markets to generate these returns. You can choose to compound your earnings automatically or withdraw them as needed."
+      question: "How is 2% daily calculated?",
+      answer: "The 2% daily return is calculated based on your principal investment amount through our AI trading system operating across XAUUSD markets. Returns are credited to your account every 24 hours on trading days (Monday-Friday). Our AI consensus model ensures consistent performance through algorithmic gold trading strategies."
     },
     {
-      question: "What are the risks?",
-      answer: "While our AI trading systems employ strict risk controls and sophisticated algorithms to minimize risk, all trading activities involve some level of risk. Market volatility can affect performance. We mitigate risks through diversification, stop-loss mechanisms, and limiting maximum drawdown to protect your capital."
+      question: "Which assets do you trade?",
+      answer: "We exclusively focus on XAUUSD (Gold) trading. By specializing in a single highly liquid asset, our AI models have developed deep expertise and pattern recognition capabilities specific to gold price movements, allowing us to maximize performance and minimize risk through specialization."
     },
     {
-      question: "How do withdrawals work?",
-      answer: "Withdrawals can be requested directly through your dashboard. Once requested, they are typically processed within 24 hours. There are no hidden fees for standard accounts, though Premium and VIP accounts enjoy additional benefits like expedited or free withdrawals."
+      question: "What if fewer than 4 AIs agree?",
+      answer: "No trade is executed. Our system requires at least 4 out of 6 AI models (Gemini 2.5, GPT-4 mini, Claude Sonnet, Anthropic Claude 2, Cohere Command, and Meta LLaMA) to agree on a trading signal before placing any trade. This consensus approach significantly reduces false signals and protects your capital from unnecessary risk."
     },
     {
-      question: "What's lifetime income?",
-      answer: "Lifetime income refers to the residual royalties paid indefinitely once qualified by meeting certain team volume milestones. These royalties are designed to provide ongoing passive income from your downline's activity without requiring additional work from you after you've built your organization."
+      question: "How do I qualify for royalties?",
+      answer: "You can qualify for royalties in two ways: 1) Reach $20,000 in group volume to earn $100/month royalty income; or 2) Achieve $50,000 balanced volume (across your left and right legs) to unlock our lifetime royalty upgrade. These royalties are paid monthly in addition to your daily 2% returns and referral commissions."
     },
     {
-      question: "How deep is the MLM structure?",
-      answer: "Our MLM structure extends 20 levels deep, allowing you to earn commissions from a vast network. This depth provides substantial earning potential as your organization grows, with varying commission rates depending on the level and your achieved rank."
+      question: "How fast are withdrawals?",
+      answer: "Standard accounts: processed within 24-48 hours. Premium accounts enjoy expedited processing times of 12 hours, while VIP accounts benefit from 6-hour processing. All withdrawals are subject to standard KYC/AML verification procedures, and there are no hidden fees for withdrawals (VIP accounts receive fee-free withdrawals)."
     },
     {
       question: "Is my investment secure?",
-      answer: "Yes. We maintain the highest security standards with SOC 2 Type II and ISO 27001 certifications. Client funds are kept in segregated accounts at top-tier banks, and all transactions are encrypted using bank-grade security protocols. Our platform undergoes regular security audits by independent firms."
+      answer: "Yes. We maintain SOC 2 Type II and ISO 27001 certifications, implement strict GDPR and AML/KYC protocols, store client funds in segregated accounts at top-tier financial institutions, and employ 24/7 monitoring systems. Our infrastructure uses military-grade encryption and multi-signature authorization for all transactions."
     },
+    {
+      question: "How deep is the MLM structure?",
+      answer: "Our MLM structure extends 20 levels deep, providing substantial earning potential as your organization grows. You earn direct referral bonuses of 10% on personally referred deposits plus residual commissions across your entire organization, with volume carry-forward to maximize your compensation."
+    }
   ];
 
   return (

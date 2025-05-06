@@ -1,7 +1,8 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowDown } from 'lucide-react';
+import { ArrowDown, Star } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Hero: React.FC = () => {
   const scrollToSection = (sectionId: string) => {
@@ -13,9 +14,10 @@ const Hero: React.FC = () => {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background */}
+      {/* Background with XAUUSD chart overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-black via-slate-900 to-black z-0">
-        <div className="absolute inset-0 bg-[url('./assets/grid-pattern.svg')] opacity-10"></div>
+        <div className="absolute inset-0 bg-[url('./assets/xauusd-chart.svg')] opacity-20"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
       </div>
 
       {/* Animated circles in the background */}
@@ -27,53 +29,72 @@ const Hero: React.FC = () => {
         <div className="flex flex-col items-center justify-center">
           {/* Logo */}
           <div className="mb-8 animate-fade-in">
-            <svg className="w-24 h-24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
-                fill="url(#paint0_linear)"
-                stroke="white"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <defs>
-                <linearGradient id="paint0_linear" x1="2" y1="2" x2="22" y2="21.02" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#8B5CF6" />
-                  <stop offset="1" stopColor="#3B82F6" />
-                </linearGradient>
-              </defs>
-            </svg>
+            <div className="flex items-center justify-center">
+              <Star className="h-16 w-16 text-primary" />
+            </div>
           </div>
           
           {/* Heading */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-gradient leading-tight">
             Earn 2% Daily Returns<br />
-            <span className="text-primary">Powered by AI</span>
+            <span className="text-primary">on Gold</span>
           </h1>
           
           {/* Subheading */}
-          <p className="text-lg md:text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
-            Trade Forex, Commodities, Indices & Crypto 24/7 with our proprietary engine.
-            Our AI-driven platform handles everything so you can focus on watching your wealth grow.
+          <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+            Powered by six AI engines—Gemini 2.5, GPT-4 mini, Claude Sonnet, et al.—trading XAUUSD 
+            with 4/6 consensus entry logic.
           </p>
           
           {/* CTA Buttons */}
           <div className="flex flex-col md:flex-row gap-4 justify-center">
-            <Button 
-              onClick={() => scrollToSection('signup')} 
-              size="lg" 
-              className="bg-primary hover:bg-primary/90 text-white text-lg px-8 py-6 rounded-md"
-            >
-              Get Started
-            </Button>
-            <Button 
-              onClick={() => scrollToSection('benefits')} 
-              variant="outline" 
-              size="lg" 
-              className="text-white border-white/20 hover:bg-white/10 text-lg px-8 py-6 rounded-md flex items-center gap-2"
-            >
-              Learn More <ArrowDown className="w-4 h-4" />
-            </Button>
+            <Link to="/contact">
+              <Button 
+                size="lg" 
+                className="bg-primary hover:bg-primary/90 text-white text-lg px-8 py-6 rounded-md"
+              >
+                Get Started
+              </Button>
+            </Link>
+            <Link to="/ai-engine">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="text-white border-white/20 hover:bg-white/10 text-lg px-8 py-6 rounded-md flex items-center gap-2"
+              >
+                Learn More <ArrowDown className="w-4 h-4" />
+              </Button>
+            </Link>
+          </div>
+          
+          {/* Stats bar */}
+          <div className="mt-16 py-4 px-6 glass-morphism rounded-lg max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="300">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 text-sm text-center">
+              <div className="flex flex-col">
+                <span className="font-bold text-white">2%</span>
+                <span className="text-gray-400">Daily ROI</span>
+              </div>
+              <div className="flex flex-col">
+                <span className="font-bold text-white">20</span>
+                <span className="text-gray-400">Trading Days/Month</span>
+              </div>
+              <div className="flex flex-col">
+                <span className="font-bold text-white">10%</span>
+                <span className="text-gray-400">Referral Bonus</span>
+              </div>
+              <div className="flex flex-col">
+                <span className="font-bold text-white">20</span>
+                <span className="text-gray-400">Levels Deep</span>
+              </div>
+              <div className="flex flex-col">
+                <span className="font-bold text-white">$20K</span>
+                <span className="text-gray-400">→ $100/mo Royalty</span>
+              </div>
+              <div className="flex flex-col">
+                <span className="font-bold text-white">$50K</span>
+                <span className="text-gray-400">→ Lifetime Royalty</span>
+              </div>
+            </div>
           </div>
           
           {/* Animated scroll indicator */}
