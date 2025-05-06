@@ -16,6 +16,7 @@ import Footer from '@/components/Footer';
 // Define AOS animation initialization
 interface AOS {
   init: () => void;
+  refresh: () => void;
 }
 
 declare global {
@@ -26,6 +27,14 @@ declare global {
 
 const Index = () => {
   useEffect(() => {
+    // Refresh AOS animations when the component mounts
+    if (window.AOS) {
+      window.AOS.refresh();
+    }
+    
+    // Scroll to top when the component mounts
+    window.scrollTo(0, 0);
+    
     // Simulating AOS initialization
     const simulateAOS = () => {
       const elements = document.querySelectorAll('[data-aos]');
@@ -49,9 +58,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      {/* Navigation */}
-      <Navigation />
-
       {/* Hero Section */}
       <Hero />
 
@@ -81,9 +87,6 @@ const Index = () => {
 
       {/* Lead Capture */}
       <LeadCapture />
-
-      {/* Footer */}
-      <Footer />
     </div>
   );
 };

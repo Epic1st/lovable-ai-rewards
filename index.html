@@ -120,33 +120,40 @@
     
     <script>
       // Show cookie consent after a delay
-      setTimeout(() => {
-        document.getElementById('cookie-consent').classList.remove('hidden');
-      }, 2000);
-      
-      // Handle cookie consent buttons
-      document.getElementById('cookie-accept')?.addEventListener('click', () => {
-        document.getElementById('cookie-consent').classList.add('hidden');
-      });
-      
-      document.getElementById('cookie-decline')?.addEventListener('click', () => {
-        document.getElementById('cookie-consent').classList.add('hidden');
-      });
-      
-      // Back to top button
-      window.addEventListener('scroll', () => {
-        const backToTopButton = document.getElementById('back-to-top');
-        if (window.scrollY > 300) {
-          backToTopButton.classList.remove('translate-y-20', 'opacity-0');
-          backToTopButton.classList.add('translate-y-0', 'opacity-100');
-        } else {
-          backToTopButton.classList.add('translate-y-20', 'opacity-0');
-          backToTopButton.classList.remove('translate-y-0', 'opacity-100');
-        }
-      });
-      
-      document.getElementById('back-to-top')?.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(() => {
+          const cookieConsent = document.getElementById('cookie-consent');
+          if (cookieConsent) {
+            cookieConsent.classList.remove('hidden');
+          }
+        }, 2000);
+        
+        // Handle cookie consent buttons
+        document.getElementById('cookie-accept')?.addEventListener('click', function() {
+          document.getElementById('cookie-consent')?.classList.add('hidden');
+        });
+        
+        document.getElementById('cookie-decline')?.addEventListener('click', function() {
+          document.getElementById('cookie-consent')?.classList.add('hidden');
+        });
+        
+        // Back to top button
+        window.addEventListener('scroll', function() {
+          const backToTopButton = document.getElementById('back-to-top');
+          if (backToTopButton) {
+            if (window.scrollY > 300) {
+              backToTopButton.classList.remove('translate-y-20', 'opacity-0');
+              backToTopButton.classList.add('translate-y-0', 'opacity-100');
+            } else {
+              backToTopButton.classList.add('translate-y-20', 'opacity-0');
+              backToTopButton.classList.remove('translate-y-0', 'opacity-100');
+            }
+          }
+        });
+        
+        document.getElementById('back-to-top')?.addEventListener('click', function() {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
       });
     </script>
   </body>
