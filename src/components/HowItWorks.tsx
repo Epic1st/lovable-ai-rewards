@@ -19,7 +19,7 @@ const HowItWorks: React.FC = () => {
     },
     {
       title: 'Receive 2% Daily',
-      description: 'Choose to auto-compound your earnings or withdraw within 24 hours, it's entirely up to you.',
+      description: 'Choose to auto-compound your earnings or withdraw within 24 hours, it\'s entirely up to you.',
       icon: <Check className="w-10 h-10" />,
       color: 'from-primary to-accent',
     },
