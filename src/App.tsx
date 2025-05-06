@@ -17,14 +17,15 @@ import FAQPage from "@/pages/FAQPage";
 import ContactPage from "@/pages/ContactPage";
 import NotFound from "@/pages/NotFound";
 import { useEffect } from "react";
+import AOS from 'aos';
 
 const queryClient = new QueryClient();
 
 const App = () => {
   useEffect(() => {
     // Initialize or refresh AOS when App mounts
-    if (typeof window !== 'undefined' && window.AOS) {
-      window.AOS.refresh();
+    if (typeof window !== 'undefined') {
+      AOS.refresh();
     }
   }, []);
 
