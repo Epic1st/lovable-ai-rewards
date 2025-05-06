@@ -21,6 +21,9 @@ const HomePage: React.FC = () => {
     
     // Scroll to top when the page loads
     window.scrollTo(0, 0);
+    
+    // Debug message to verify component loading
+    console.log("HomePage component mounted");
   }, []);
 
   return (

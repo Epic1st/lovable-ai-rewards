@@ -25,6 +25,7 @@ const App = () => {
   useEffect(() => {
     // Initialize or refresh AOS when App mounts
     if (typeof window !== 'undefined') {
+      console.log("App mounted - refreshing AOS");
       AOS.refresh();
     }
   }, []);
@@ -37,7 +38,7 @@ const App = () => {
         <BrowserRouter>
           <div className="flex flex-col min-h-screen bg-background">
             <Navigation />
-            <div className="flex-grow">
+            <div className="flex-grow pt-16"> {/* Added pt-16 to account for fixed header */}
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/ai-engine" element={<AIEnginePage />} />
