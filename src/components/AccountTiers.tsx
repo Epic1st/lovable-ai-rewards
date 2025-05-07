@@ -1,10 +1,17 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Check, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 const AccountTiers: React.FC = () => {
+  useEffect(() => {
+    // Manually trigger AOS animations on component mount
+    if (typeof window !== 'undefined' && window.AOS) {
+      window.AOS.refresh();
+    }
+  }, []);
+  
   const tiers = [
     {
       name: 'Standard',
@@ -63,7 +70,7 @@ const AccountTiers: React.FC = () => {
   return (
     <section id="tiers" className="py-20 bg-black/30 relative">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16" data-aos="fade-up">
+        <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gradient mb-4">Account Tiers</h2>
           <p className="text-lg text-gray-400 max-w-3xl mx-auto">
             Choose the account tier that matches your investment goals and trading experience.
@@ -78,8 +85,6 @@ const AccountTiers: React.FC = () => {
                 "relative rounded-lg overflow-hidden transition-all duration-300",
                 tier.isPopular ? "transform md:-translate-y-4" : ""
               )}
-              data-aos="fade-up"
-              data-aos-delay={index * 100}
             >
               {/* Popular badge */}
               {tier.isPopular && (

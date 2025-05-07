@@ -4,6 +4,7 @@ import App from './App.tsx'
 import './index.css'
 import './assets/AOS.css'
 import AOS from 'aos';
+import 'aos/dist/aos.css'; // Import the official AOS CSS
 
 // Initialize AOS animation library with specific configuration
 document.addEventListener('DOMContentLoaded', () => {

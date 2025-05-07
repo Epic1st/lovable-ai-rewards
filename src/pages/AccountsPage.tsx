@@ -6,10 +6,14 @@ import AOS from 'aos';
 const AccountsPage: React.FC = () => {
   useEffect(() => {
     // Refresh AOS animations when the page loads
-    AOS.refresh();
+    if (typeof AOS !== 'undefined' && AOS.refresh) {
+      AOS.refresh();
+    }
     
     // Scroll to top when the page loads
     window.scrollTo(0, 0);
+    
+    console.log("AccountsPage component mounted");
   }, []);
 
   return (

@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { 
   Star, 
@@ -11,6 +11,13 @@ import {
 } from 'lucide-react';
 
 const AIEngine: React.FC = () => {
+  useEffect(() => {
+    // Manually trigger AOS animations on component mount
+    if (typeof window !== 'undefined' && window.AOS) {
+      window.AOS.refresh();
+    }
+  }, []);
+
   const aiModels = [
     { name: "Gemini 2.5", color: "from-blue-500 to-blue-700" },
     { name: "GPT-4 mini", color: "from-green-500 to-green-700" },
@@ -46,10 +53,10 @@ const AIEngine: React.FC = () => {
   return (
     <section className="py-24 bg-background relative">
       {/* Subtle background pattern */}
-      <div className="absolute inset-0 bg-[url('./assets/grid-pattern.svg')] opacity-5"></div>
+      <div className="absolute inset-0 bg-[url('/src/assets/grid-pattern.svg')] opacity-5"></div>
 
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16" data-aos="fade-up">
+        <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gradient mb-4">Six-AI Consensus Trading</h2>
           <p className="text-lg text-gray-400 max-w-3xl mx-auto">
             Our engine monitors XAUUSD 24/7 via APIs to six leading AI models. A trade executes only when <span className="text-white font-semibold">4 out of 6 AIs</span> confirm entry signals—maximizing accuracy and reducing false signals.
@@ -57,7 +64,7 @@ const AIEngine: React.FC = () => {
         </div>
 
         {/* AI Models Network Visualization */}
-        <div className="relative mb-20 h-96" data-aos="fade-up">
+        <div className="relative mb-20 h-96">
           <div className="absolute inset-0 flex items-center justify-center">
             {/* Central Node */}
             <div className="z-10 w-32 h-32 rounded-full bg-primary/20 backdrop-blur-xl border border-primary flex items-center justify-center text-center p-4 shadow-lg shadow-primary/20">
@@ -119,8 +126,6 @@ const AIEngine: React.FC = () => {
                     ...style,
                     animationDelay: `${index * 0.2}s`,
                   }}
-                  data-aos="fade-in"
-                  data-aos-delay={index * 100}
                 >
                   <div className="text-center">
                     <div className={cn("w-10 h-10 mx-auto rounded-full mb-1 flex items-center justify-center bg-gradient-to-r", model.color)}>
@@ -136,8 +141,6 @@ const AIEngine: React.FC = () => {
             <div 
               className="absolute right-10 w-28 h-28 rounded-full bg-green-500/20 backdrop-blur-xl border border-green-500 flex items-center justify-center p-3 shadow-lg shadow-green-500/20"
               style={{ right: '10%' }}
-              data-aos="fade-left"
-              data-aos-delay="600"
             >
               <div className="text-center">
                 <BarChart className="w-8 h-8 mx-auto mb-1 text-green-500" />
@@ -152,8 +155,6 @@ const AIEngine: React.FC = () => {
             <div 
               key={index} 
               className="glass-morphism rounded-lg p-6 transition duration-300 hover:-translate-y-1"
-              data-aos="fade-up"
-              data-aos-delay={index * 100}
             >
               <div className="p-3 rounded-full bg-accent/10 w-fit mb-4">
                 {React.cloneElement(feature.icon, { className: "text-primary" })}
@@ -164,7 +165,7 @@ const AIEngine: React.FC = () => {
           ))}
         </div>
 
-        <div className="text-center" data-aos="fade-up">
+        <div className="text-center">
           <p className="text-lg text-gray-400 max-w-3xl mx-auto mb-8">
             Our engine operates 24/7, continuously analyzing the XAUUSD (Gold) market through state-of-the-art 
             AI models. By requiring a 4/6 consensus, we achieve a balance between capturing opportunities and 
