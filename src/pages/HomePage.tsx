@@ -19,17 +19,37 @@ const HomePage: React.FC = () => {
     
     // Scroll to top when the page loads
     window.scrollTo(0, 0);
-
-    // Initialize AOS with a slight delay to ensure DOM is fully loaded
-    const initializeAOS = () => {
-      console.log("Initializing AOS from HomePage");
-      AOS.refresh();
-    };
-
-    // Set a timeout to ensure all elements are rendered
-    const timeoutId = setTimeout(initializeAOS, 100);
     
-    return () => clearTimeout(timeoutId);
+    // Ensure AOS is initialized
+    if (!AOS.instance) {
+      console.log("Initializing AOS from HomePage");
+      AOS.init({
+        duration: 800,
+        once: false,
+        mirror: true,
+        disable: false,
+        offset: 120,
+      });
+    }
+
+    // Refresh AOS to detect new elements
+    AOS.refresh();
+    
+    // Set additional timeouts to ensure all elements are rendered and animations work
+    const timeoutId = setTimeout(() => {
+      console.log("HomePage timeout - refreshing AOS again");
+      AOS.refresh();
+    }, 100);
+    
+    const secondTimeoutId = setTimeout(() => {
+      console.log("HomePage second timeout - refreshing AOS once more");
+      AOS.refresh();
+    }, 500);
+    
+    return () => {
+      clearTimeout(timeoutId);
+      clearTimeout(secondTimeoutId);
+    };
   }, []);
 
   return (

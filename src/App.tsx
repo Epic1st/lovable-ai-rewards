@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import HomePage from "@/pages/HomePage";
@@ -21,22 +21,70 @@ import AOS from 'aos';
 
 const queryClient = new QueryClient();
 
+// Create a component that refreshes AOS on route changes
+const AOSInitializer = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Initialize or refresh AOS when location changes
+    console.log("Route changed - refreshing AOS");
+    
+    // Ensure AOS is initialized
+    if (!AOS.instance) {
+      console.log("Initializing AOS in route change");
+      AOS.init({
+        duration: 800,
+        once: false,
+        mirror: true,
+        disable: false,
+        offset: 120,
+      });
+    }
+    
+    // Force refresh AOS
+    AOS.refresh();
+    
+    // Add a small delay to ensure all elements are ready
+    const timeoutId = setTimeout(() => {
+      console.log("Route change timeout - refreshing AOS again");
+      AOS.refresh();
+    }, 200);
+    
+    return () => clearTimeout(timeoutId);
+  }, [location]);
+
+  return null;
+};
+
 const App = () => {
   useEffect(() => {
     // Initialize or refresh AOS when App mounts
     console.log("App mounted - refreshing AOS");
+    
+    // Ensure AOS is initialized
+    if (!AOS.instance) {
+      console.log("Initializing AOS from App");
+      AOS.init({
+        duration: 800,
+        once: false,
+        mirror: true,
+        disable: false,
+        offset: 120,
+      });
+    }
+    
+    // Force refresh AOS
     AOS.refresh();
     
-    // Make sure all content is properly displayed
-    const handleContentReady = () => {
-      console.log("Content ready - refreshing AOS again");
-      AOS.refresh();
-    };
+    // Make sure all content is properly displayed with additional checks
+    const timeoutIds = [300, 600, 1000].map(delay => 
+      setTimeout(() => {
+        console.log(`App timeout ${delay}ms - refreshing AOS again`);
+        AOS.refresh();
+      }, delay)
+    );
     
-    // Refresh AOS after a short delay to ensure all content is mounted
-    const timeoutId = setTimeout(handleContentReady, 500);
-    
-    return () => clearTimeout(timeoutId);
+    return () => timeoutIds.forEach(id => clearTimeout(id));
   }, []);
 
   return (
@@ -47,7 +95,8 @@ const App = () => {
         <BrowserRouter>
           <div className="flex flex-col min-h-screen bg-background">
             <Navigation />
-            <div className="flex-grow"> {/* Removed pt-16 to avoid double padding */}
+            <AOSInitializer />
+            <div className="flex-grow">
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/ai-engine" element={<AIEnginePage />} />
