@@ -14,49 +14,75 @@ import AOS from 'aos';
 
 const HomePage: React.FC = () => {
   useEffect(() => {
-    // Refresh AOS animations when the page loads
-    if (typeof AOS !== 'undefined' && AOS.refresh) {
-      AOS.refresh();
-    }
+    // Explicitly refresh AOS animations when HomePage mounts
+    console.log("HomePage component mounted");
     
     // Scroll to top when the page loads
     window.scrollTo(0, 0);
+
+    // Initialize AOS with a slight delay to ensure DOM is fully loaded
+    const initializeAOS = () => {
+      console.log("Initializing AOS from HomePage");
+      AOS.refresh();
+    };
+
+    // Set a timeout to ensure all elements are rendered
+    const timeoutId = setTimeout(initializeAOS, 100);
     
-    // Debug message to verify component loading
-    console.log("HomePage component mounted");
+    return () => clearTimeout(timeoutId);
   }, []);
 
   return (
     <main className="min-h-screen bg-background text-foreground overflow-x-hidden">
       {/* Hero Section */}
-      <Hero />
+      <div data-aos="fade-in" data-aos-duration="1000">
+        <Hero />
+      </div>
 
       {/* Benefits Section */}
-      <Benefits />
+      <div data-aos="fade-up" data-aos-delay="100">
+        <Benefits />
+      </div>
 
       {/* How It Works Section */}
-      <HowItWorks />
+      <div data-aos="fade-up" data-aos-delay="100">
+        <HowItWorks />
+      </div>
 
       {/* Performance Dashboard */}
-      <Performance />
+      <div data-aos="fade-up" data-aos-delay="100">
+        <Performance />
+      </div>
 
       {/* Account Tiers */}
-      <AccountTiers />
+      <div data-aos="fade-up" data-aos-delay="100">
+        <AccountTiers />
+      </div>
 
       {/* MLM Plan */}
-      <MLMPlan />
+      <div data-aos="fade-up" data-aos-delay="100">
+        <MLMPlan />
+      </div>
 
       {/* Security & Compliance */}
-      <Security />
+      <div data-aos="fade-up" data-aos-delay="100">
+        <Security />
+      </div>
 
       {/* Testimonials Carousel */}
-      <Testimonials />
+      <div data-aos="fade-up" data-aos-delay="100">
+        <Testimonials />
+      </div>
 
       {/* FAQs */}
-      <FAQ />
+      <div data-aos="fade-up" data-aos-delay="100">
+        <FAQ />
+      </div>
 
       {/* Lead Capture */}
-      <LeadCapture />
+      <div data-aos="fade-up" data-aos-delay="100">
+        <LeadCapture />
+      </div>
     </main>
   );
 };
