@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
@@ -180,10 +179,20 @@ const Navigation: React.FC = () => {
         </div>
 
         <div className="hidden lg:flex items-center space-x-4">
-          <Button variant="outline" size="sm">
-            Login
-          </Button>
+          <Link to="/login">
+            <Button
+              variant="outline"
+              size="sm"
+              className="w-full text-white border-gray-500 hover:bg-gray-700 hover:border-gray-400"
+            >
+              Login
+            </Button>
+          </Link>
+
+          
+          <Link to="/signup">
           <Button>Get Started</Button>
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
@@ -219,7 +228,7 @@ const Navigation: React.FC = () => {
           <Link to="/contact" className="text-gray-300 hover:text-white py-2" onClick={() => setIsMobileMenuOpen(false)}>Contact</Link>
           
           <div className="flex flex-col space-y-2 pt-2 border-t border-gray-800">
-            <Button variant="outline" className="w-full">Login</Button>
+           <Link to="/login"><Button variant="outline" className="w-full">Login</Button></Link> 
             <Button className="w-full">Get Started</Button>
           </div>
         </div>

@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
                   </linearGradient>
                 </defs>
               </svg>
-              <span className="text-xl font-bold text-white">Lovable</span>
+              <span className="text-xl font-bold text-white">Barter Bloom</span>
             </div>
             <p className="text-gray-400 mb-4">
               Pioneering AI-driven trading with 2% daily returns and a revolutionary MLM structure.

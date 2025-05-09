@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -15,23 +14,18 @@ import SecurityPage from "@/pages/SecurityPage";
 import TestimonialsPage from "@/pages/TestimonialsPage";
 import FAQPage from "@/pages/FAQPage";
 import ContactPage from "@/pages/ContactPage";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import NotFound from "@/pages/NotFound";
 import { useEffect } from "react";
-import AOS from 'aos';
+import AOS from "aos";
 
-const queryClient = new QueryClient();
-
-// Create a component that refreshes AOS on route changes
+// AOS route change handler
 const AOSInitializer = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Initialize or refresh AOS when location changes
-    console.log("Route changed - refreshing AOS");
-    
-    // Ensure AOS is initialized
     if (!AOS.instance) {
-      console.log("Initializing AOS in route change");
       AOS.init({
         duration: 800,
         once: false,
@@ -40,30 +34,34 @@ const AOSInitializer = () => {
         offset: 120,
       });
     }
-    
-    // Force refresh AOS
     AOS.refresh();
-    
-    // Add a small delay to ensure all elements are ready
-    const timeoutId = setTimeout(() => {
-      console.log("Route change timeout - refreshing AOS again");
-      AOS.refresh();
-    }, 200);
-    
+    const timeoutId = setTimeout(() => AOS.refresh(), 200);
     return () => clearTimeout(timeoutId);
   }, [location]);
 
   return null;
 };
 
+// Wrapper to control layout visibility
+const LayoutWrapper = ({ children }) => {
+  const location = useLocation();
+  const hideLayout = ["/login", "/signup"].includes(location.pathname);
+
+  return (
+    <div className="flex flex-col min-h-screen bg-background">
+      {!hideLayout && <Navigation />}
+      <AOSInitializer />
+      <div className="flex-grow">{children}</div>
+      {!hideLayout && <Footer />}
+    </div>
+  );
+};
+
+const queryClient = new QueryClient();
+
 const App = () => {
   useEffect(() => {
-    // Initialize or refresh AOS when App mounts
-    console.log("App mounted - refreshing AOS");
-    
-    // Ensure AOS is initialized
     if (!AOS.instance) {
-      console.log("Initializing AOS from App");
       AOS.init({
         duration: 800,
         once: false,
@@ -72,19 +70,11 @@ const App = () => {
         offset: 120,
       });
     }
-    
-    // Force refresh AOS
     AOS.refresh();
-    
-    // Make sure all content is properly displayed with additional checks
-    const timeoutIds = [300, 600, 1000].map(delay => 
-      setTimeout(() => {
-        console.log(`App timeout ${delay}ms - refreshing AOS again`);
-        AOS.refresh();
-      }, delay)
+    const timeoutIds = [300, 600, 1000].map((delay) =>
+      setTimeout(() => AOS.refresh(), delay)
     );
-    
-    return () => timeoutIds.forEach(id => clearTimeout(id));
+    return () => timeoutIds.forEach((id) => clearTimeout(id));
   }, []);
 
   return (
@@ -93,25 +83,22 @@ const App = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <div className="flex flex-col min-h-screen bg-background">
-            <Navigation />
-            <AOSInitializer />
-            <div className="flex-grow">
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/ai-engine" element={<AIEnginePage />} />
-                <Route path="/roi-calculator" element={<ROICalculatorPage />} />
-                <Route path="/mlm-plan" element={<MLMPlanPage />} />
-                <Route path="/accounts" element={<AccountsPage />} />
-                <Route path="/security" element={<SecurityPage />} />
-                <Route path="/testimonials" element={<TestimonialsPage />} />
-                <Route path="/faq" element={<FAQPage />} />
-                <Route path="/contact" element={<ContactPage />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </div>
-            <Footer />
-          </div>
+          <LayoutWrapper>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/ai-engine" element={<AIEnginePage />} />
+              <Route path="/roi-calculator" element={<ROICalculatorPage />} />
+              <Route path="/mlm-plan" element={<MLMPlanPage />} />
+              <Route path="/accounts" element={<AccountsPage />} />
+              <Route path="/security" element={<SecurityPage />} />
+              <Route path="/testimonials" element={<TestimonialsPage />} />
+              <Route path="/faq" element={<FAQPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </LayoutWrapper>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
